@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Drawing</title>
+	<script>
+	  function starting(){
+	     let g=document.getElementById("c1").getContext("2d");
+		 g.clearRect(0, 0, 300, 300);
+		 let w=parseFloat(document.getElementById("widthbox").value);
+         let h=parseFloat(document.getElementById("heightbox").value);
+         let c= document.getElementById("colorbox").value;
+		 let cx=150;
+          
+		 g.fillStyle = c;
+		 g.fillRect(cx-w/2, cx-h/2, w, h);
+          
+           g.beginPath()
+         //arc(x, y, radius, startAngle, endAngle, counterclockwise);
+		 g.arc(cx-w/2, cx-h/2, 5, 3.14/2, -3.14/2, false);
+         g.arc(cx-w/2, cx+h/2, 5, 3.14/2, -3.14/2, false);
+         g.arc(cx+w/2, cx+h/2, 5, -3.14/2, 3.14/2, false);
+         g.arc(cx+w/2, cx-h/2, 5, -3.14/2, 3.14/2, false);
+		 g.fill();
+          
+          calculate(g, cx,w,h)
+        
+      
+           
+	  }
+        
+        function calculate(g,cx,w,h){
+    
+          let area = w*h;
+          g.fillStyle="black";
+          g.textAlign = "center";
+          g.fillText(area,cx, cx, w, h);
+         console.log(area);
+          
+          
+	  }
+	</script>
+  </head>
+  <body onload="starting()">
+    <canvas id="c1" width="300" height="300">
+	</canvas><br />
+	<input type="number" id="widthbox" value="100" />
+	<input type="number" id="heightbox" value="50" />
+    <input type="color" id="colorbox" value="#CD5C5C" />
+	<input type="button" value="draw" onclick="starting()"/>
+    
+  </body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>
+		Bouncing Ball by Data
+	</title>
+	<style>
+		h3 {
+			color: orangered;
+		}
+		
+		canvas {
+			background-color: grey;
+			width: 500px;
+			height: 500px;
+			position: absolute;
+			
+			left: 450px;
+		}
+	</style>
+</head>
+
+<body>
+	<center>
+		<h1>Math and Physics for Games</h1>
+		<h3>Bouncing Ball</h3>
+		<canvas>
+		</canvas>
+	</center>
+    
+    <script>
+	var canvas = document.querySelector("canvas");
+
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
+
+	var l = canvas.getContext('2d');
+        
+        var speed = 1;
+
+	// Random Start
+	
+	var x = Math.floor(Math.random() * innerWidth);
+	var y = Math.floor(Math.random() * innerHeight);
+        
+    // Random Speed
+	var vx = Math.floor(Math.random() * 2);
+	var vy = Math.floor(Math.random() * 4);
+        
+    // Random Radius
+	var radius = Math.random()*30 + Math.random()*10;
+
+	move();
+
+	// Move and Bounce
+	function move() {
+		requestAnimationFrame(move);
+
+		// It clears the specified pixels within
+		// the given rectangle
+		 //l.clearRect(0, 0, innerWidth, innerHeight);
+        
+
+		// Creating a circle
+		l.beginPath();
+       
+		
+        l.strokeStyle = "darkgreen";
+        
+
+        
+        
+		l.arc(x, y, radius, 0, Math.PI * 2, false);
+		
+        l.stroke();
+        
+        /*var team1 = 0;
+        var team2 = 0;
+        var team3 = 0;
+        var team4 = 0;
+       */
+         
+
+		// Conditions so that the ball bounces
+		// from the edges
+		if (radius + x > innerWidth)
+            {
+             l.strokeStyle = "darkred";
+                l.stroke();
+			vx = 0 - vx;
+                //team1++;
+                
+                //console.log(team1);
+                }
+
+		if (x - radius < 0)
+            {
+             l.strokeStyle = "darkred";
+                 l.stroke();
+			vx = 0 - vx;
+                //team2++;
+                //console.log(team2);
+                }
+
+		if (y + radius > innerHeight)
+            {
+             l.strokeStyle = "darkred";
+                 l.stroke();
+			vy = 0 - vy;
+                //team3++;
+                //console.log(team3);
+                }
+
+		if (y - radius < 0)
+            {
+             l.strokeStyle = "darkred";
+                 l.stroke();
+			vy = 0 - vy;
+                //team4++;
+                //console.log(team4);
+                }
+
+		x = x + vx;
+		y = y + vy;
+
+	}
+</script>
+
+    <input type="button" value="SpeedUp" onclick="move()" />
+    
+    
+    
+</body>
+
+</html>

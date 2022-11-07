@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+  <head>
+      <title>
+		3d calculations
+	</title>
+   <script>
+    let groundY=150, centerX=200;
+    let x=200, x1a=150, x2=-200, y0=0, y1=300, zStart=1, n=8, step=3;
+    let x2a= 100, y2=200;
+    let x3a= 150, y3=300;
+    let x4a= 100, y4=200;
+	let ux=100, uy=50;
+	function screenX(wx, wy, wz){
+	    return centerX+(wx-ux)/wz;
+	}
+	function screenY(wx, wy, wz){
+	    return groundY-(wy-uy)/wz;
+	}
+    function draw(){
+	   let g=c1.getContext("2d");
+	   g.clearRect(0, 0, 400, 300);
+	   z=zStart;
+	   for(let i=0; i<n; i++){
+	     // g.beginPath();
+	    // g.moveTo(screenX(x, y0, z), screenY(x, y0, z));
+	    //  g.lineTo(screenX(x, y1, z), screenY(x, y1, z));
+	   //   g.lineTo(screenX(x1a, y1, z), screenY(x1a, y1, z));
+	   //   g.moveTo(screenX(x2, y0, z), screenY(x2, y0, z));
+	   //   g.lineTo(screenX(x2, y1, z), screenY(x2, y1, z));
+	   //   g.stroke();
+          g.beginPath();
+		  g.arc(screenX(x1a, y1, z), screenY(x1a, y1, z), z*2, 0, 10, false);
+          g.stroke();
+          g.beginPath();
+          g.arc(screenX(x2a, y2, -z), screenY(x1a, y1, z), z*2, 0, 10, false);
+          g.stroke();
+          g.beginPath();
+          g.arc(screenX(x3a, y3, z), screenY(-x1a, -y1, z), z*2, 0, 10, false);
+          g.stroke();
+          g.beginPath();
+          g.arc(screenX(x4a, y4, -z), screenY(-x1a, -y1, z), z*2, 0, 10, false);
+          g.stroke();
+	      z=z+step;
+		  //Add bars also to left side
+	   }
+	   zStart-=0.01;
+	   if(zStart<0.5){zStart+=step;}
+	   requestAnimationFrame(draw);
+	}
+	//add left (and up and down) button
+   </script>
+  </head>
+  <body onload="draw()">
+      <div>
+		<h1 style="text-align:justify">Math and Physics for Games</h1>
+		<h3 style="text-align:justify">3d Calculations</h3>
+        </div>
+    <canvas id="c1" width="400" height="300"></canvas><br />
+    &emsp; <input type="button" value="Λ" onclick="uy-=20"/> <br>
+	<input type="button" value="<" onclick="ux+=20"/>
+	&ensp;<input type="button" value=">" onclick="ux-=20"/><br>
+    &emsp; <input type="button" value="v" onclick="uy+=20"/>
+  </body>
+</html>

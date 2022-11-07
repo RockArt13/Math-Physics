@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+		Bouncing Ball with acceleration and gravity
+	</title>
+    <style>
+        canvas {border: 10px solid brown;}
+    </style>
+</head>
+<body>
+    	<div>
+		<h1 style="text-align:justify">Math and Physics for Games</h1>
+		<h3 style="text-align:justify">Bouncing Ball with Acceleration and Gravity</h3>
+        </div>
+    <canvas id="c1" width="1000" height="500"></canvas>
+    <script>
+        var c1,
+  g,
+  cx = 700, //current X
+  cy = 100, // current Y
+  fx = 3,   // adding or substracting futureX
+  fy = 5,   // adding or substracting futureY
+  radius = 25,
+  gravity = 0.24,
+  acceleration = -0.9;
+ 
+  
+
+function draw() {
+
+  c1 = document.getElementById("c1");
+  g = c1.getContext("2d");
+  ballBounce();
+}
+
+function ballBounce() {
+  g.clearRect(0, 0, c1.width, c1.height);
+    requestAnimationFrame(ballBounce);
+    
+    //right wall
+  if (cx + radius >= c1.width) {
+    fx *= acceleration;
+    cx = c1.width - radius; // go back
+  } 
+    //left wall
+    else if (cx - radius <= 0) {
+    fx *= acceleration ;
+    cx = radius; // go farward
+  }
+    //ground
+  if (cy + radius >= c1.height) {
+    fy *= acceleration ;
+    cy = c1.height - radius;
+    fx *= -acceleration; //reverse
+  } 
+    //ceiling
+    else if (cy - radius <= 0) {
+    fy *= acceleration ;
+    cy = radius;
+  }
+
+  
+    // next x
+  cx += fx;
+    
+    // next y
+    //adding gravity
+  fy += gravity; 
+  cy += fy;
+    
+  g.beginPath();
+  g.arc(cx, cy, radius, 0, 2 * Math.PI);
+  g.fillStyle = 'red';
+  g.fill();
+}
+
+draw();
+
+    </script>
+</body>
+</html>

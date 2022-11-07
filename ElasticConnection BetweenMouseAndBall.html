@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+  <head>
+      <title>
+		Hit the target pendulum game
+	</title>
+    <script>
+	   let x1=2, y1=4;
+	   let x0=1, y0=2;
+	   let dx0=0, dy0=0;
+	   let r=0.2;
+	   let pm=60;
+       let starttime=Date.now();
+        //target coordinates
+       let recx = 30;
+       let recy = 150;
+        //target hit range
+       let recrange = 0.25
+           
+        
+       //hitting mode
+        let fall = false;
+       // winning condition
+        let win = false;
+	   
+          function draw(){
+	      let g=c1.getContext("2d");
+		  g.clearRect(0, 0, 300, 300);
+           
+
+		  let curtime=Date.now();
+		  let deltatime=(curtime-starttime)/1000.0;
+		  let mass=0.1;
+		  let gforce=-9.8*mass;
+  	      let wdx=x1-x0, wdy=y1-y0, wlen=Math.sqrt(wdx*wdx+wdy*wdy);
+		  let wfx=wdx/wlen;
+	      let wfy=wdy/wlen;
+		  let force=0;
+		
+		  
+		  if(wlen>0.2){
+		     force=(wlen-0.2)*0.1;
+		  }
+           
+            if(wlen>4){
+		     force=0;
+		  }
+           
+           
+		  dx0+=wfx*force;
+          dy0+=wfy*force;		 
+		  dy0+=gforce*deltatime;
+		  x0+=deltatime*dx0;
+		  y0+=deltatime*dy0;
+		  dx0*=0.99;
+		  dy0*=0.99;
+		  
+		  g.beginPath();
+           //direction
+		  g.moveTo(pm*x0, 300-y0*pm);
+		  g.lineTo(pm*(x0+dx0*0.1), 300-(y0+dy0*0.1)*pm)
+		  g.stroke();
+		  
+		  g.beginPath();
+           //pendelum ball big
+		  g.arc(pm*x0, 300-y0*pm, r*pm, 0, 6.28, false);
+		  g.stroke();
+		  g.beginPath();
+       
+           
+        
+           //pendelum ball small - static
+		  g.arc(pm*x1, 300-y1*pm, r*pm/2, 0, 6.28, false);
+
+            
+           //setting the target  
+           g.rect(recx, recy, 10, 10);
+           g.fillStyle = "blue";
+           g.fillRect(recx, recy, 10, 10);
+      
+		  g.stroke();
+          requestAnimationFrame(draw);
+		  starttime=curtime;
+           
+            //Checking Winning Condition
+             WinCon(x0,y0);
+           
+           // Winning Text
+           if (win == true)
+           {
+            g.font = "50px serif";
+            g.fillText("You hit!", 100, 100);
+            }
+           
+	   }
+        //pendelum effect
+       function mdrag(e){
+           fall = false;
+	     //console.log(c1.style.left);
+		  let wy=(300-e.layerY-c1.style.top)/pm;
+		  let wx=(e.layerX-c1.style.left)/pm;
+		  x1=wx;
+		  y1=wy;
+	   }
+        //cut the pendelum
+        function mdown(e){
+            fall = true;
+          //console.log(c1.style.left);
+		  let wy=(300-e.layerY-c1.style.top)/pm;
+		  let wx=(e.layerX-c1.style.left)/pm;
+           
+		  x1=-wx;
+		  y1=-wy; 
+	   }
+          // WIN?
+        function WinCon(x,y){
+         //if(fall != false && x < 0.58 && x > 0.56 && y > 2.35 && y < 2.4)
+            if(fall != false && x < recx/pm + recrange && x > (recx/pm + recrange/2)  && y > recy/pm - recrange && y < recy/pm - (recrange/2))
+            {
+                win = true;
+            }    
+	   }
+	</script>
+  </head>
+  <body onload="draw()">
+      <div>
+		<h1 style="text-align:justify">Math and Physics for Games</h1>
+		<h3 style="text-align:justify">Hit the Target Pendulum Game</h3>
+        </div>
+    <canvas id="c1" width="300" height="300" onmousemove="mdrag(event)" onmousedown="mdown(event)">
+	</canvas>
+      </body>
+</html>
