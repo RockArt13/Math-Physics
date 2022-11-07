@@ -1,0 +1,39 @@
+
+<!doctype html>
+<html>
+  <head>
+    <script>
+	   let m1=3, m2=4;
+	   let x1=2, x2=7;
+	   let v1=1, v2=-1;
+       let r=1;  
+       let pm=30; //pixel per meter	 
+       let starttime=Date.now();	   
+	   function draw(){
+	      let g=c1.getContext("2d");
+		  g.clearRect(0, 0, 300, 300);
+		  let curtime=Date.now();
+		  let deltatime=(curtime-starttime)/1000.0;
+		  let force=0;
+		  let distance=x2-x1;
+		  if(distance<2){force=3*(2-distance);}
+		  console.log(distance, force);
+		  let dv1=-force*deltatime/m1;
+		  let dv2=force*deltatime/m2;
+		  v1+=dv1;
+		  v2+=dv2;
+		  x1+=deltatime*v1;
+		  x2+=deltatime*v2;
+		  g.fillRect(pm*(x1-r), 100, pm*2*r, m1*10);
+		  g.fillRect(pm*(x2-r), 100, pm*2*r, m2*10);
+          requestAnimationFrame(draw);
+		  starttime=curtime;
+	   }
+	   //add horizontal moving
+	</script>
+  </head>
+  <body onload="draw()">
+    <canvas id="c1" width="300" height="300">
+	</canvas>
+  </body>
+</html>

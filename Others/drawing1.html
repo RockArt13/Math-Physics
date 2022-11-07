@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Drawing</title>
+	<script>
+	  function starting(){
+	     let g=document.getElementById("c1").getContext("2d");
+		 g.fillStyle="green";
+		 g.fillRect(20, 30, 40, 50);
+		 g.beginPath();
+		 g.moveTo(100, 10);
+		 g.lineTo(100, 50);
+		 g.stroke();
+		 
+		 g.beginPath()
+		 g.arc(150, 100, 30, 3.14/2, -3.14/2, false);
+//		 g.stroke();
+		 g.fill();
+	  }
+	</script>
+  </head>
+  <body onload="starting()">
+    <canvas id="c1" width="300" height="300">
+	</canvas>
+  </body>
+</html>

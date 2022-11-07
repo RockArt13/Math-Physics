@@ -1,0 +1,37 @@
+
+<!doctype html>
+<html>
+  <head>
+    <script>
+	   let starttime=new Date().getTime();
+	   let x=60, starty=5, startspeed=0;
+	   let grav=-9.8;
+	   let groundtime=starttime+1000*Math.sqrt(Math.abs(2*starty/grav));
+	   let timetoground=Math.sqrt(Math.abs(2*starty/grav));
+	   let dt=100;
+	   let ground=250, pixelsToMeter=30;
+	   function draw(){
+	      let g=c1.getContext("2d");
+		  g.clearRect(0, 0, 300, 300);
+		  let newtime=Date.now();
+		  let t=(newtime-starttime)/1000;
+		  if(newtime>groundtime){
+		     starttime=groundtime;
+			 starty=0;
+			 startspeed=-timetoground*grav;
+			 groundtime+=2*timetoground*1000
+		  }
+		  y=starty+startspeed*t+grav*Math.pow(t, 2)/2;
+		  console.log(y);
+		  g.fillRect(x, ground-pixelsToMeter*y-10, 10, 10);
+		  g.fillRect(0, ground, 300, 5);
+          requestAnimationFrame(draw);
+	   }
+	   //add horizontal moving
+	</script>
+  </head>
+  <body onload="draw()">
+    <canvas id="c1" width="300" height="300">
+	</canvas>
+  </body>
+</html>

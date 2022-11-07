@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Testing page</title>
+	<script>
+	  function calculateEurToAMD(){
+	    document.getElementById("answer").innerHTML=
+	      document.getElementById("box1").value*401.99;
+	  }
+	</script>
+      
+      <script>
+	  function calculateAmdToEur(){
+	    document.getElementById("answer2").innerHTML=
+	      document.getElementById("box2").value*0.0025;
+	  }
+	</script>
+  </head>
+  <body>
+    <h1>Calculations</h1>
+	EUR to AMD: 
+	<input type="number" id="box1" />
+	<input type="button" value="to amd" 
+     onclick="calculateEurToAMD()"	/>
+	<span id="answer">?</span>
+     <br>
+      <br>
+      AMD to EUR: 
+	<input type="number" id="box2" />
+	<input type="button" value="to eur" 
+     onclick="calculateAmdToEur()"	/>
+	<span id="answer2">?</span>
+  
+  </body>
+</html>

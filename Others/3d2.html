@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<script>
+    let groundY = 250, centerX=200;
+    let x=200, y0=0, y1=300, z=1, n=8;
+     function screenX(wx,wy,wz)
+    {
+        return centerX+wx/wz;
+    }
+    function screenY(wx,wy,wz)
+    {
+        return groundY-wy/wz;
+    }
+    function start(){
+        let g = c1.getContext("2d");
+        g.beginPath();
+     
+        for (let i = 0; i < n; i++)
+        {
+            g.moveTo(screenX(x,y0,z), screenY(x,y0,z));
+            g.lineTo(screenX(x,y1,z), screenY(x,y1,z));
+            z=z+3;
+        }
+         g.stroke();
+    }
+    </script>
+    </head>
+    <body onload="start()">
+    <canvas id="c1" width="400" height="300"></canvas>
+    </body>
+</html>

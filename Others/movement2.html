@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <script>
+	   let x=60, rwidth=20, wallX=250, wallX2=50;
+	   let step=25;
+	   function draw(){
+	      let g=c1.getContext("2d");
+		  g.clearRect(0, 0, 300, 300);
+		  g.fillRect(x, 100, rwidth, 10);
+		  g.beginPath();
+		  g.moveTo(wallX, 50);
+		  g.lineTo(wallX, 250);
+		  g.stroke();
+		  if(x+rwidth+step>=wallX){
+		    let dtw=wallX-(x+rwidth);
+			let dfw=step-dtw;
+			x=wallX-dfw-rwidth;
+			step=-Math.abs(step);
+		  } else {
+             x+=step;		  
+		  }
+
+	   }
+	</script>
+  </head>
+  <body onload="setInterval('draw()', 1000);">
+    <canvas id="c1" width="300" height="300">
+	</canvas>
+  </body>
+</html>

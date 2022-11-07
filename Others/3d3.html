@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<script>
+    let groundY = 250, centerX=200;
+    let x=200, y0=0, y1=300, zStart=1, n=8, step=3;
+     function screenX(wx,wy,wz)
+    {
+        return centerX+wx/wz;
+    }
+    function screenY(wx,wy,wz)
+    {
+        return groundY-wy/wz;
+    }
+    function draw(){
+        let g = c1.getContext("2d");
+        g.clearRect(0,0,400,300)
+        g.beginPath();
+        z=zStart
+     
+        for (let i = 0; i < n; i++)
+        {
+            g.moveTo(screenX(x,y0,z), screenY(x,y0,z));
+            g.lineTo(screenX(x,y1,z), screenY(x,y1,z));
+            g.moveTo(screenX(y0,x,z), screenY(y0,x,z));
+            g.lineTo(screenX(y1,x,z), screenY(y1,x,z));
+            g.moveTo(screenX(x,y0,-z), screenY(x,y0,-z));
+            g.lineTo(screenX(x,y1,-z), screenY(x,y1,-z));
+            g.moveTo(screenX(y0,x,-z), screenY(y0,x,-z));
+            g.lineTo(screenX(y1,x,-z), screenY(y1,x,-z));
+            z=z+step;
+        }
+        zStart -=0.1;
+        
+        if(zStart<0.5) {zStart+=step;}
+         g.stroke();
+        requestAnimationFrame(draw);
+    }
+    </script>
+    </head>
+    <body onload="draw()">
+    <canvas id="c1" width="400" height="300"></canvas>
+    </body>
+</html>

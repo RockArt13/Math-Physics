@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.3.0/math.js"></script>
+    <script>
+	   let groundY=250, centerX=200;
+	   let lineStart=[200, 0, 5], lineEnd=[200, 300, 5];
+	   let lineStart2=[300, 0, 5], lineEnd2=[600, 300, 5];
+	   let user=[100, 100, 0];
+//	   console.log(math.subtract(lineStart, user));
+       function screenX(wp){
+	       let d=math.subtract(wp, user);
+		   return centerX+d[0]/d[2];
+	   }
+       function screenY(wp){
+	       let d=math.subtract(wp, user);
+		   return groundY-d[1]/d[2];
+	   }
+	   function draw(){
+	      let g=c1.getContext("2d");
+	   	  g.beginPath();
+	      g.moveTo(screenX(lineStart), screenY(lineStart));
+	      g.lineTo(screenX(lineEnd), screenY(lineEnd));
+          g.moveTo(screenX(lineStart2), screenY(lineStart2));
+	      g.lineTo(screenX(lineEnd2), screenY(lineEnd2));
+		  g.stroke();
+	   }
+	</script>
+  </head>
+  <body onload="draw()">
+      <canvas id="c1" width="400" height="300"></canvas><br />
+  </body>
+</html>

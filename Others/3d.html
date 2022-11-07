@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<script>
+    let x=200, y0=0, y1=300, z=5, n=8;
+    function start(){
+        let g = c1.getContext("2d");
+        g.beginPath();
+     
+        for (let i = 0; i < n; i++)
+        {
+            g.moveTo(x/z, y0/z);
+            g.lineTo(x/z, y1/z);
+            z=z+3;
+        }
+         g.stroke();
+    }
+    </script>
+    </head>
+    <body onload="start()">
+    <canvas id="c1" width="400" height="300"></canvas>
+    </body>
+</html>

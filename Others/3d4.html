@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+   <script>
+    let groundY=250, centerX=200;
+    let x=200, x1a=150, x2=-200, y0=0, y1=300, zStart=1, n=8, step=3;
+	let ux=100, uy=50;
+	function screenX(wx, wy, wz){
+	    return centerX+(wx-ux)/wz;
+	}
+	function screenY(wx, wy, wz){
+	    return groundY-(wy-uy)/wz;
+	}
+    function draw(){
+	   let g=c1.getContext("2d");
+	   g.clearRect(0, 0, 400, 300);
+	   z=zStart;
+	   for(let i=0; i<n; i++){
+	      g.beginPath();
+	      g.moveTo(screenX(x, y0, z), screenY(x, y0, z));
+	      g.lineTo(screenX(x, y1, z), screenY(x, y1, z));
+	      g.lineTo(screenX(x1a, y1, z), screenY(x1a, y1, z));
+	      g.moveTo(screenX(x2, y0, z), screenY(x2, y0, z));
+	      g.lineTo(screenX(x2, y1, z), screenY(x2, y1, z));
+	      g.stroke();
+		  g.beginPath();
+		  g.arc(screenX(x1a, y1, z), screenY(x1a, y1, z), 30/z, 0, 6.28, false);
+		  g.stroke();
+	      z=z+step;
+		  //Add bars also to left side
+	   }
+	   zStart-=0.01;
+	   if(zStart<0.5){zStart+=step;}
+	   requestAnimationFrame(draw);
+	}
+	//add left (and up and down) button
+   </script>
+  </head>
+  <body onload="draw()">
+    <canvas id="c1" width="400" height="300"></canvas><br />
+	<input type="button" value="l" onclick="ux-=10"/>
+    <input type="button" value="r" onclick="ux+=10"/>
+  </body>
+</html>

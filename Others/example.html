@@ -1,0 +1,53 @@
+
+<!doctype html>
+<html>
+  <head>
+    <script>
+	   let x1=0, y1=6.4;
+	   let x2=10, y2=6.4;
+	   let x0=4, y0=4;
+	   let dx0=0.4, dy0=0.4;
+	   let r=0.7;
+	   let pm=30;
+	   let wdx=x2-x1, wdy=y2-y1, wlen=Math.sqrt(wdx*wdx+wdy*wdy);
+	   let wfx=wdy/wlen;
+	   let wfy=-wdx/wlen;
+	   //Add speed and draw speed direction to ball
+       let starttime=Date.now();	
+	   function draw(){
+	      let g=c1.getContext("2d");
+		  g.clearRect(0, 0, 300, 300);
+		  g.fillRect(0, 0, 5, 300);
+		  let curtime=Date.now();
+		  let deltatime=(curtime-starttime)/1000.0;
+		  let force=0;
+		  let d=Math.abs(wdx*(y1-y0)-(x1-x0)*wdy)/wlen;
+		  if(d<r){
+		     force=(r-d)*1;
+		  }
+		  dx0+=wfx*force;
+		  dy0+=wfy*force;
+		  x0+=deltatime*dx0;
+		  y0+=deltatime*dy0;
+		  
+		  g.beginPath();
+		  g.moveTo(pm*x1, 300-pm*y1);
+		  g.lineTo(pm*x2, 300-pm*y2);
+		  g.moveTo(pm*x0, 300-y0*pm);
+		  g.lineTo(pm*(x0+dx0), 300-(y0+dy0)*pm)
+		  g.stroke();
+		  g.fillText(""+d.toFixed(1), 200, 100);
+		  g.beginPath();
+		  g.arc(pm*x0, 300-y0*pm, r*pm, 0, 6.28, false);
+		  g.stroke();
+          requestAnimationFrame(draw);
+		  starttime=curtime;
+	   }
+	   //add horizontal moving
+	</script>
+  </head>
+  <body onload="draw()">
+    <canvas id="c1" width="300" height="300">
+	</canvas>
+  </body>
+</html>

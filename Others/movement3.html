@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <script>
+	   let startx=58, rwidth=20, wallX=250;
+	   let px_s=25; //pixels / sec
+	   let starttime=new Date().getTime();
+	   let sectowall=(wallX-startx-rwidth)/px_s;
+	   let walltime=starttime+sectowall*1000;
+	   function draw(){
+	      let g=c1.getContext("2d");
+		  g.clearRect(0, 0, 300, 300);
+		  let newtime=new Date().getTime();
+		  let x=startx+(newtime-starttime)/1000*px_s;
+		  if(newtime>walltime){
+		     console.log(newtime, walltime, newtime-walltime);
+		     x=wallX-(newtime-walltime)/1000*px_s-rwidth;
+			 console.log(x);
+		  }
+		  g.fillRect(x, 100, rwidth, 10);
+		  g.beginPath();
+		  g.moveTo(wallX, 50);
+		  g.lineTo(wallX, 250);
+		  g.stroke();		 
+	   }
+	</script>
+  </head>
+  <body onload="draw();">
+    <input type="button" value="d" onclick="draw()" />
+    <canvas id="c1" width="300" height="300">
+	</canvas>
+  </body>
+</html>
