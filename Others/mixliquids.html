@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <script>
+	   let waterAmount=100;
+	   let waterTemperature=20;
+	   function addWater(){
+	       //waterAmount+=100;
+           let waterEnergy = waterAmount*waterTemperature+100*20;
+           let waterMass = waterAmount + 100;
+           waterTemperature = waterEnergy/waterMass;
+           waterAmount = waterMass;
+		   span1.innerText=waterAmount;
+	   }
+	   function calculateTemperature(){
+	       let deltaDegree=range1.valueAsNumber/4.18/waterAmount;
+		   waterTemperature+=deltaDegree;
+	       span2.innerText=waterTemperature.toFixed(2);
+	   }
+	   function rangeMoved(){
+	      span3.innerText=range1.value;
+		  span1.innerText=waterAmount;
+	   }
+	</script>
+  </head>
+  <body onload="setInterval(calculateTemperature, 1000); rangeMoved()">
+     <input type="button" value="Add" onclick="addWater()" /> 
+	    water 100 ml <br />
+	 Amount of water: <span id="span1"></span><br />
+	 Temperature of water: <span id="span2"></span><br />
+     Power of heater 
+	    <input type="range" min="0" max="2000" value="750" id="range1"
+            onchange="rangeMoved()"	/>
+        <span id="span3"></span>		
+  </body>
+</html>
