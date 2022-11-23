@@ -1,0 +1,122 @@
+
+<!doctype html>
+<html>
+  <head>
+    <script>
+	   let airVolume=3*3*6; // cuboid area
+	   let roomArea=2*3*3 + 2 * 3 *6 + 2 * 3 * 6 ;
+	   let airKilograms=airVolume*1.2;
+	   let airTemperature=0;
+	   let outsideTemperature=0;
+	   
+	   function calculateTemperature(){
+            let temp = airTemperature;
+	       let deltaDegree=range1.valueAsNumber/1000/airKilograms;
+		   airTemperature+=deltaDegree;
+		   //add heat flow to outside 
+		   //let joulesOutside=0.48*(airTemperature-outsideTemperature)*roomArea;
+		   let joulesOutside=0.48*(airTemperature-outsideRange.valueAsNumber)*roomArea;
+           deltaDegree=joulesOutside/1000/airKilograms;
+		   airTemperature-=deltaDegree;
+	       span2.innerText=airTemperature.toFixed(8);
+           
+         
+          let g=c1.getContext("2d");
+
+           // termometer visual
+           g.fillStyle = 'red';
+           
+           g.fillRect(20, 150, 30, -airTemperature*100);
+           /*
+           if (temp<airTemperature)
+               {
+           g.clearRect(20, 150, 30, -temp*100);
+                   }
+           else{
+               g.clearRect(20, 150, 30, -temp*100);
+           }
+           */
+           g.stroke();
+           
+           console.log("temp " + temp +  " air " + airTemperature);
+          
+           if (airTemperature <= 0)
+               {
+                   g.fillStyle = `rgba(65, ${Math.floor(150 - airTemperature*90)}, 250, ${Math.floor(1.0 -airTemperature)}`;
+                   
+                   //console.log(Math.floor(150 - airTemperature*90));
+               } else {
+                   g.fillStyle = `rgba(${Math.floor(65 + airTemperature*700)}, 150, ${Math.floor(250 - airTemperature*700)}, ${Math.floor(1.0 + airTemperature)}`;
+                   //console.log("as" + Math.floor(65 + airTemperature*500));
+               }
+          
+           
+           
+           // console.log("Air " + airTemperature);
+       
+             g.fillRect(100, 90, 100, 100);
+             
+           g.stroke();
+          
+           
+           
+	   }
+	   function rangeMoved(){
+	      span3.innerText=range1.value;
+	   }
+        function rangeMovedOutside(){
+	      span4.innerText=outsideRange.value;
+	   }
+        
+        function draw(){
+             // degrees
+             let g=c1.getContext("2d");
+           
+           g.fillStyle = 'black';
+           
+           for (let x = -5; x < 6; x++)
+               {
+                   g.textAlign = 'end';
+                   g.fillText("" + (-x*10).toFixed(0), 10, x*10+150);
+                }
+             
+             
+           g.stroke();
+          
+            
+        }
+        
+        function outside(){
+             let g=c1.getContext("2d");
+           
+            g.fillStyle = 'blue';
+            
+            g.fillStyle = `rgba(${Math.floor(airTemperature*10)}, ${Math.floor((255- airTemperature)/3)}, 0, 0.6)`;
+           
+            //console.log("Air " + airTemperature);
+       
+             g.fillRect(100, 90, 100, 100);
+             
+           g.stroke();
+          
+            
+        }
+	</script>
+  </head>
+  <body onload="setInterval(calculateTemperature, 1000); rangeMoved(); draw()">
+
+	 Temperature: <span id="span2"></span><br />
+     Power of heater 
+	    <input type="range" min="0" max="2000" value="750" id="range1"
+            onchange="rangeMoved()"	/> 
+      <span id="span3"></span><br />
+       Outside Temperature
+        <input type="range" min="-30" max="30" value="0" id="outsideRange"
+            onchange="rangeMovedOutside()"	/>
+        
+      <span id="span4"></span><br />
+      
+      <canvas id="c1" width="400" height="300"></canvas><br/>
+      <canvas id="c2" width="400" height="300"></canvas><br/>
+  </body>
+</html>
