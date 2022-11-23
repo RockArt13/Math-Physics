@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+    <script>
+	   let waterAmount=100;
+	   let waterTemperature=20;
+	   function addWater(){
+	       //waterAmount+=100;
+		   let waterEnergy=waterAmount*waterTemperature+
+		                   100*20;
+		   let waterMass=waterAmount+100;
+		   waterTemperature=waterEnergy/waterMass;
+		   waterAmount=waterMass;
+		   span1.innerText=waterAmount;
+           
+                let g=c1.getContext("2d");
+	            g.fillStyle = "blue";
+                waterLevel = waterAmount/10;
+                g.fillRect(20, 150, 77, -waterLevel);
+                
+                
+	   }
+	   function calculateTemperature(){
+	       let deltaDegree=range1.valueAsNumber/4.18/waterAmount;
+		   waterTemperature+=deltaDegree;
+	       span2.innerText=waterTemperature.toFixed(2);	
+           
+           let g=c1.getContext("2d");
+           let col = waterTemperature;
+          // g.fillStyle = `rgba(245, ${Math.floor(waterTemperature*10)}, 66, 0.1)`;
+           g.fillStyle = `rgba(${Math.floor(waterTemperature*10)}, ${Math.floor((255- waterTemperature)/3)}, 0, 0.6)`;
+           g.fillRect(20, 150, 77, -waterAmount/10);
+           console.log(waterTemperature*10, (255 - waterTemperature)/3);
+           
+	   }
+	   function rangeMoved(){
+	      span3.innerText=range1.value;
+		  span1.innerText=waterAmount;
+	   }
+        
+        function draw()
+        {
+                
+        }
+	</script>
+  </head>
+  <body onload="setInterval(calculateTemperature, 1000); rangeMoved(); draw()">
+     <input type="button" value="Add" onclick="addWater()" /> 
+	    water 100 ml <br />
+	 Amount of water: <span id="span1"></span><br />
+	 Temperature of water: <span id="span2"></span><br />
+     Power of heater 
+	    <input type="range" min="0" max="2000" value="750" id="range1"
+            onchange="rangeMoved()"	/>
+        <span id="span3"></span>	
+      
+       <canvas id="c1" width="400" height="300"></canvas><br/>
+  </body>
+</html>
