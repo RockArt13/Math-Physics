@@ -27,8 +27,14 @@ Bouncing between circles.
 ## 6. Bouncing Frameworks
 Animation and bouncing with frameworks.
 
-## 7. 3d calculations
+## 7. 3d Calculations
 Using matrices in graphics calculations.
+
+## 8. Water Heating Simulator
+Energy, heat, temperature. Specific heat capacity and amount of fuel. Temperature simulation on one room.
+
+## 9. Room Heating And Heat Flow Out
+Simulations - room with inventary, two rooms, house with external environment.
 
 
 # Comments
