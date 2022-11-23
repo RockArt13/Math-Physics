@@ -1,0 +1,38 @@
+<!doctype>
+<html>
+  <head>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.umd.js" ></script>
+	 <script>
+	    let chart1;
+		let roomTemperature=3;
+		let secnr=3;
+	    function startPage(){
+		    chart1=new Chart(document.getElementById("c1"), {
+			   type: 'line',
+			   data:{
+			      labels:['1 sec', '2 sec', '3 sec'],
+				  datasets:[{
+				     label: 'room 1',
+					 data: [0, 2, 3]
+				  }]
+			   }
+			});
+			setInterval(simulate, 1000);
+		}
+		function simulate(){
+		   roomTemperature+=1;
+		   roomTemperature*=0.75;
+		   secnr++;
+		   chart1.data.labels.push(secnr+" sec");
+		   chart1.data.datasets[0].data.push(roomTemperature);
+		   chart1.update();
+		}
+	 </script>
+  </head>
+  <body onload="startPage()">
+    <h1>Chart example</h1>
+    <div style="width: 300px; height: 200px">
+     <canvas id="c1" width="400" height="300"></canvas>
+	</div>
+  </body>
+</html>

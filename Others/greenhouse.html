@@ -1,0 +1,83 @@
+
+
+<!doctype html>
+<html>
+  <head>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.umd.js" ></script>
+    <script>
+	   let airVolume=3*3*6;
+	   let roomArea=2*3*3 + 2 * 3 *6 + 2 * 3 * 6 ;
+	   let airKilograms=airVolume*1.2;
+	   let airTemperature=0;
+	   let outsideTemperature=0;
+	   
+	   function calculateTemperature(){
+	      secnr++;
+	       let deltaDegree=range1.valueAsNumber/1000/airKilograms;
+		   airTemperature+=deltaDegree;
+		   //add heat flow to outside 
+		   let joulesOutside=0.48*(airTemperature-outsideTemperature)*roomArea;
+		   deltaDegree=joulesOutside/1000/airKilograms;
+		   airTemperature-=deltaDegree;
+           
+           if (airTemperature > 0.2)
+           {
+               range1.valueAsNumber = 0;
+               console.log("he");
+               
+           }
+           
+           if (airTemperature < 0)
+           {
+               range1.valueAsNumber = 750;
+               console.log("he");
+               
+           }
+	       span2.innerText=airTemperature.toFixed(8);
+		   chart1.data.labels.push(secnr+" sec");
+		   chart1.data.datasets[0].data.push(airTemperature);
+		   chart1.update();
+		   
+	   }
+	   function rangeMoved(){
+	      span3.innerText=range1.value;
+	   }
+	   	let chart1;
+		//let roomTemperature=3;
+		let secnr=0;
+	    function startPage(){
+		    chart1=new Chart(document.getElementById("c1"), {
+			   type: 'line',
+			   data:{
+			      labels:[],
+				  datasets:[{
+				     label: 'room 1',
+					 data: []
+				  }]
+			   }
+			});
+		//setInterval(simulate, 1000);
+		}
+		/*function simulate(){
+		  //roomTemperature+=1;
+		  // roomTemperature*=0.95;
+		   secnr++;
+		   chart1.data.labels.push(secnr+" sec");
+		   chart1.data.datasets[0].data.push(roomTemperature);
+		   chart1.update();
+		}*/
+	</script>
+  </head>
+  <body onload="startPage(); setInterval(calculateTemperature, 1000); rangeMoved()">
+
+	 Temperature: <span id="span2"></span><br />
+     Power of heater 
+	    <input type="range" min="0" max="2000" value="750" id="range1"
+            onchange="rangeMoved()"	/>
+        <span id="span3"></span>	
+
+    <div style="width: 300px; height: 200px">
+     <canvas id="c1" width="400" height="300"></canvas>
+	</div>		
+  </body>
+</html>
