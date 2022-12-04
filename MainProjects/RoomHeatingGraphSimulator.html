@@ -1,0 +1,148 @@
+
+
+<!doctype html>
+<html>
+  <head>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.umd.js" ></script>
+    <script>
+	   let bedroomAirVolume=3*3*3;
+	   let roomOutsideAreaForBedroom=2*3*3 + 2 * 3 *3 + 3 * 3 ;
+	   let bedroomAirKilograms=bedroomAirVolume*1.2;
+	   let bedroomAirTemperature=0;
+	   
+	   let LivingRoomairVolume=4*4*4;
+	   let roomOutsideAreaForLivingRoom=2*4*4 + 2 * 4 *4 + 4 * 4 ;
+	   let airKilograms2=LivingRoomairVolume*1.2;
+	   let livingRoomAirTemperature=0;
+        
+       let kitchenVolume=2*2*2;
+	   let roomOutsideAreaForKitchen=2*2*2 + 2 * 2 * 2 + 2 * 2 ;
+	   let kitchenAirKilogram =kitchenVolume*1.2;
+	   let kitchenTemperature=0;
+            
+       let bathroomVolume=2*2*1;
+	   let roomOutsideAreaForBathroom=2*3*3 + 2 * 3 * 3 + 2 * 2 ;
+	   let bathroomAirKilogram = bathroomVolume*1.2;
+	   let bathroomTemperature=0;
+        
+       let babyVolume=3*2*3;
+	   let roomOutsideAreaForBabyRoom=2*3*3 + 2 * 3 * 3 + 2 * 2 ;
+	   let babyAirKilogram = babyVolume*1.2;
+	   let babyTemperature=0;
+          
+	   let areaBetweenRooms=3*3;
+	   
+	   let outsideTemperature=0;
+	   let heaterState=true;
+	   let suggestedTemperature=20;
+	   let hysteresis=1;
+	   
+	   function calculateTemperature(){
+	      secnr++;
+		   if(heaterState==true){
+	         let deltaDegree=range1.valueAsNumber/1000/bedroomAirKilograms;
+		     bedroomAirTemperature+=deltaDegree*30;
+		   }
+		   let joulesToSecond=10*0.48*(bedroomAirTemperature-livingRoomAirTemperature-kitchenTemperature-bathroomTemperature-babyTemperature)*areaBetweenRooms;
+		   let deltaDegree1=joulesToSecond/1000/bedroomAirKilograms;
+		   let deltaDegree2=joulesToSecond/1000/airKilograms2;
+           let kitchenDeltaDegree = joulesToSecond/1000/kitchenAirKilogram;
+           let bathroomDeltaDegree = joulesToSecond/1000/bathroomAirKilogram;
+           let babyDeltaDegree = joulesToSecond/1000/babyAirKilogram;
+		   bedroomAirTemperature-=deltaDegree1*30;
+		   livingRoomAirTemperature+=deltaDegree2*30;
+           kitchenTemperature+=kitchenDeltaDegree*30;
+           bathroomTemperature+=bathroomDeltaDegree*30;
+           babyTemperature+=babyDeltaDegree*30
+		   
+		   if(livingRoomAirTemperature>suggestedTemperature){heaterState=false;}
+		   if(heaterState==false && livingRoomAirTemperature<suggestedTemperature-hysteresis){
+		     heaterState=true;
+		   }
+		   let joulesOutside=0.48*(bedroomAirTemperature-outsideTemperature)*roomOutsideAreaForBedroom;
+		   deltaDegree=joulesOutside/1000/bedroomAirKilograms;
+		   bedroomAirTemperature-=deltaDegree*30;
+
+		   let joulesOutside2=0.48*(livingRoomAirTemperature-outsideTemperature)*roomOutsideAreaForLivingRoom;
+		   deltaDegree2=joulesOutside2/1000/airKilograms2;
+		   livingRoomAirTemperature-=deltaDegree2*30;
+           
+           let joulesOutside3=0.48*(kitchenTemperature-outsideTemperature)*roomOutsideAreaForKitchen;
+		   kitchenDeltaDegree=joulesOutside3/1000/kitchenAirKilogram;
+		   kitchenTemperature-=kitchenDeltaDegree*30;
+           
+           let joulesOutside4=0.48*(bathroomTemperature-outsideTemperature)*roomOutsideAreaForBathroom;
+		   bathroomDeltaDegree=joulesOutside4/1000/bathroomAirKilogram;
+		   bathroomTemperature-=bathroomDeltaDegree*30;
+           
+           let joulesOutside5=0.48*(babyTemperature-outsideTemperature)*roomOutsideAreaForBabyRoom;
+		   bathroomDeltaDegree=joulesOutside4/1000/bathroomAirKilogram;
+		   bathroomTemperature-=bathroomDeltaDegree*30;
+           
+           
+            // consol.log("as " + kitchenTemperature);
+          
+	       span2.innerText=bedroomAirTemperature.toFixed(8);
+		   chart1.data.labels.push(secnr+" min");
+		   chart1.data.datasets[0].data.push(bedroomAirTemperature);
+		   chart1.data.datasets[1].data.push(livingRoomAirTemperature);
+           chart1.data.datasets[2].data.push(kitchenTemperature);
+           chart1.data.datasets[3].data.push(bathroomTemperature);
+           chart1.data.datasets[4].data.push(babyTemperature);
+          
+		   chart1.update();
+		  
+          
+
+	   }
+	   function rangeMoved(){
+	      span3.innerText=range1.value;
+	   }
+	   	let chart1;
+		let secnr=0;
+	    function startPage(){
+		    chart1=new Chart(document.getElementById("c1"), {
+			   type: 'line',
+			   data:{
+			      labels:[],
+				  datasets:[{
+				     label: 'Bedroom',
+					 data: []
+				  }, 
+				  {
+				     label: 'Living Room',
+					 data: []
+				  },
+                             {
+				     label: 'Kitchen',
+					 data: []
+				  },
+                             {
+				     label: 'Bathroom',
+					 data: []
+				  },
+                                   {
+				     label: 'Baby Room',
+					 data: []
+				  }
+				  ]
+			   }
+			});
+		}
+	</script>
+  </head>
+  <body onload="startPage(); setInterval(calculateTemperature, 1000); rangeMoved()">
+      
+      My Room Temperature<br/><br/>
+
+	 Temperature: <span id="span2"></span><br />
+     Power of heater
+	    <input type="range" min="0" max="2000" value="750" id="range1"
+            onchange="rangeMoved()"	/>
+        <span id="span3"></span>	
+
+    <div style="width: 300px; height: 200px">
+     <canvas id="c1" width="400" height="300"></canvas>
+	</div>		
+  </body>
+</html>
