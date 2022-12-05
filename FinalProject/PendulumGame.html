@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+	<html>
+	<head>
+	<title>Final Project</title>
+	</head>
+	<body>
+		<h1>Math and Physics For Games: Final Project
+            <h2>Give the right parameter to the pendulum and catch the ball!</h2>
+			
+		<script> 
+            showTarget();
+			window.mass1="";
+			window.t1=0;
+			window.isSet=false;
+			
+			function m1() {
+			 window.mass1=prompt("Mass: ");	
+				if (window.mass1!=null && window.mass1!="" && Number(window.mass1)>0)
+				document.getElementById("M1P").innerHTML="Mass = "+window.mass1+" kg";
+				else
+				document.getElementById("M1P").innerHTML="Please enter a valid value.";	
+			}
+			
+			
+			function angle1() {
+				window.t1=prompt("Please enter the angle (radians): ");
+				if (Number(window.t1)>=0)
+					document.getElementById("T1P").innerHTML="Angle 1 = "+window.t1+" radians";
+				else
+					document.getElementById("T1P").innerHTML="Please enter a valid value.";
+			}
+			
+	
+			
+			function turnOffButtons() {
+				if (window.mass1<=0 || window.mass2<=0 || window.t1<0 || window.t2<0) {
+					document.getElementById("playP").innerHTML="Please set reasonable values for the pendula and the angles first.";
+				}
+				else {
+				document.getElementById("m1b").disabled=true;
+				document.getElementById("angle1b").disabled=true;
+				document.getElementById("offButton").disabled=true;
+				setUp();
+				isSet=true;
+				}
+			}
+            
+                    function showTarget()
+                    {
+                        
+	var canvas=document.getElementById("layer1");
+    var context=canvas.getContext("2d");
+	
+	canvas.width=800;
+	canvas.height=800;
+                       
+            //target
+            context.beginPath();
+            context.lineWidth = "10";
+            context.strokeStyle = "blue";
+            context.rect(250, 300, 50, 50);
+            context.stroke(); 
+                        
+                    }
+			</script>	
+			<p><button id ="m1b" onclick="m1()">Mass</button></p>
+			<p><button id="angle1b" onclick="angle1()">Angle</button></p>
+			<p><button id="offButton" onclick="turnOffButtons()">PLAY</button></p>
+			<p id="M1P"></p>
+			<p id="T1P"></p>
+			<p id="playP"></p>
+			
+		</h1>
+		<h3> 
+			<div class="container">
+			<canvas id="layer1" width="800" height="800" style="position: absolute; left: 0; top: 620; z-index: 1; border:1px solid #000000;"> </canvas>
+			<canvas id="layer2" width="800" height="800" styel="position: absolute; left: 0; top: 620; z-index: 2; border:1px solid #000000;"> </canvas>
+			</div>
+		    <script> 
+                function setUp() {
+	var canvas=document.getElementById("layer1");
+    var context=canvas.getContext("2d");
+	var lowCanvas=document.getElementById("layer2");
+	var lowContext=lowCanvas.getContext("2d");
+	canvas.width=800;
+	canvas.height=800;
+	lowCanvas.width=800;
+	lowCanvas.height=800;
+                       
+            //target
+            lowContext.beginPath();
+            lowContext.lineWidth = "10";
+            lowContext.strokeStyle = "blue";
+            lowContext.rect(250, 300, 50, 50);
+            lowContext.stroke(); 
+             
+           
+	var m1=window.mass1;
+	var radius1=m1/10;
+	var g=9.8;
+	var time =0.1;
+	var l1=100;
+	var Theta=Number(window.t1);
+	var dTheta=0;
+	var line={x0: 0, y0: 0, x:0, y:0};
+            
+           
+start();
+function start()
+{
+    var id = setInterval(animate,10);
+    function animate() {
+			context.clearRect(0,0,context.canvas.width, context.canvas.height);
+			
+        
+          // console.log(line2.x, line2.y);
+        
+        if(line2.x>250 && line2.x<300 && line2.y>300 && line2.y<350)
+            {
+                console.log("WIN!");
+            }
+       
+
+	}
+	
+	var id2 = setInterval(drawPaths,10);
+	function drawPaths() {
+		lowContext.lineWidth=5;
+		lowContext.strokeStyle="green";
+		drawLine(lowContext, line.x, line.y, line.x+1, line.y+1);
+		
+
+      
+	}
+	
+	}
+
+	function drawLine(ctx, startx, starty, endx, endy) {
+		ctx.beginPath();
+		ctx.moveTo(startx,starty);
+		ctx.lineTo(endx, endy);
+		ctx.stroke();
+		ctx.closePath();
+	}
+
+	function drawCircle(ctx, centerx, centery, radius) {
+		ctx.beginPath();
+		ctx.arc(centerx, centery, radius, 0, 2*Math.PI);
+		ctx.fill();
+		ctx.closePath();
+	}
+                    
+	window.addEventListener("load",setUp);
+}
+            
+            </script>
+		</h3> 
+		
+		</body>
+		</html>
