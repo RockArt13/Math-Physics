@@ -5,50 +5,42 @@
 	</head>
 	<body>
 		<h1>Math and Physics For Games: Final Project
-            <h2>Give the pendulum the relevant parameters and attempt to make the ball swing to the blue square!</h2>
+            <h2>Give the pendulum the relevant parameters and attempt to make the ball swing to the target!</h2>
             <h3> The target is the blue square</h3>
             <h3> Pendulum starting poing is the orange small square</h3>
 			
 		<script> 
-            //showTarget();
-            
-                      function rangeMoved(){
-	      span3.innerText= m1range.value + "kg";
-	   }
-            
-                          function angleRangeMoved(){
-	      span4.innerText= angleRange.value + "°C";
-	   }
-			window.mass1="";
+            window.mass1="";
 			window.t1=0;
-			window.isSet=false;
+			window.playMode=false;
+            
+            function rangeMoved()
+            {
+                spanMass1.innerText = m1range.value + "kg";
+            }
+            
+            function angleRangeMoved()
+            {
+                spanAngle1.innerText = angleRange.value + "°C";
+            }
 			
-			function m1() {
-               
-                window.mass1=m1range.value;
-				//if (window.mass1!=null && window.mass1!="" && Number(window.mass1)>0)
+			function m1() 
+            {
+                window.mass1 = m1range.value;
 				document.getElementById("M1P").innerHTML="Mass = "+window.mass1+" kg";
-				//else
-				//document.getElementById("M1P").innerHTML="Please enter a valid value.";	
 			}
 			
 			
-			function angle1() {
+			function angle1() 
+            {
 				window.t1=angleRange.value * (Math.PI/180);
-                    //prompt("Please enter the angle (radians): ");
-				if (Number(window.t1)>=0)
-					document.getElementById("T1P").innerHTML="Angle = "+window.t1.toFixed(2)+" radians";
-				else
-					document.getElementById("T1P").innerHTML="Please enter a valid value.";
+                document.getElementById("T1P").innerHTML="Angle = "+window.t1.toFixed(2)+" radians";
 			}
 			
 	
 			
-			function turnOffButtons() {
-				if (window.mass1<=0 || window.mass2<=0 || window.t1<0 || window.t2<0) {
-					document.getElementById("playP").innerHTML="Please set reasonable values for the pendula and the angles first.";
-				}
-				else {
+			function turnOffButtons() 
+            {
 				document.getElementById("m1b").disabled=true;
 				document.getElementById("angle1b").disabled=true;
 				document.getElementById("offButton").disabled=true;
@@ -56,41 +48,42 @@
                 document.getElementById("angleRange").disabled=true;
                     
 				setUp();
-				isSet=true;
-				}
+				playMode=true;
 			}
             
-                    function showTarget()
-                    {
-                        console.log("hey");
-	var canvas=document.getElementById("layer1");
-    var context=canvas.getContext("2d");
-	
-	canvas.width=800;
-	canvas.height=800;
-                       
-            //target
+            function showTarget()
+            {
+                var canvas=document.getElementById("layer1");
+                var context=canvas.getContext("2d");
+                canvas.width=800;
+                canvas.height=800;
+                
+                //target
             context.beginPath();
             context.lineWidth = "10";
             context.strokeStyle = "blue";
             context.rect(250, 300, 50, 50);
             context.stroke(); 
-                        context.beginPath();
+                //pendelum starting point
+            context.beginPath();
             context.lineWidth = "10";
             context.strokeStyle = "orange";
             context.rect(400, 400, 10, 10);
             context.stroke(); 
-                        
-                    }
-			</script>	
-			<p>Mass<input type="range" min="0" max="500" value="250" id ="m1range" onchange="rangeMoved()"/>
-             <span id="span3"></span>
-            <button id="m1b" onclick="m1()">ok</button></p>	
-			<p>Angle<input type="range" min="0" max="360" value="90" id ="angleRange" onchange="angleRangeMoved()"/>
-                 <span id="span4"></span>
-                <button id="angle1b" onclick="angle1()">ok</button></p>
+            }
+			</script>
+            
+			<p>Ball Mass<input type="range" min="1" max="500" value="250" id ="m1range" onchange="rangeMoved()"/>
+                <span id="spanMass1">150kg</span>
+                <button id="m1b" onclick="m1()">OK</button></p>	
+            
+			<p>Swing Angle<input type="range" min="0" max="360" value="90" id ="angleRange" onchange="angleRangeMoved()"/>
+                <span id="spanAngle1">45°C</span>
+                <button id="angle1b" onclick="angle1()">OK</button></p>
+            
 			<p><button id="offButton" onclick="turnOffButtons()">PLAY</button></p>
-			<p id="M1P"></p>
+			
+            <p id="M1P"></p>
 			<p id="T1P"></p>
 			<p id="playP"></p>
 			
@@ -100,42 +93,47 @@
 			<canvas id="layer1" width="800" height="800" style="position: absolute; left: 0; top: 620; z-index: 1; border:10px solid #000000;"> </canvas>
 			<canvas id="layer2" width="800" height="800" styel="position: absolute; left: 0; top: 620; z-index: 2; border:100px solid #000000;"> </canvas>
 			</div>
+            
 		    <script> 
-                function setUp() {
-	var canvas=document.getElementById("layer1");
-    var context=canvas.getContext("2d");
-	var lowCanvas=document.getElementById("layer2");
-	var lowContext=lowCanvas.getContext("2d");
-	canvas.width=800;
-	canvas.height=800;
-	lowCanvas.width=800;
-	lowCanvas.height=800;
-                       
-            //target
-            lowContext.beginPath();
-            lowContext.lineWidth = "10";
-            lowContext.strokeStyle = "blue";
-            lowContext.rect(250, 300, 50, 50);
-            lowContext.stroke(); 
+                
+                function setUp() 
+                {
+                    var canvas=document.getElementById("layer1");
+                    var context=canvas.getContext("2d");
+                    var lowCanvas=document.getElementById("layer2");
+                    var lowContext=lowCanvas.getContext("2d");
+                    canvas.width=800;
+                    canvas.height=800;
+                    lowCanvas.width=800;
+                    lowCanvas.height=800;
+                    
+                    //target
+                    lowContext.beginPath();
+                    lowContext.lineWidth = "10";
+                    lowContext.strokeStyle = "blue";
+                    lowContext.rect(250, 300, 50, 50);
+                    lowContext.stroke(); 
              
            
-	var m1=window.mass1;
-	var radius1=m1/10;
-	var g=9.8;
-	var time =0.1;
-	var l1=100;
-	var Theta=Number(window.t1);
-	var dTheta=0;
-	var line={x0: 0, y0: 0, x:0, y:0};
+                    var m1=window.mass1;
+                    var radius1=m1/10;
+                    var g=9.8;
+                    var time =0.1;
+                    var l1=100;
+                    var Theta=Number(window.t1);
+                    var dTheta=0;
+                    var line={x0: 0, y0: 0, x:0, y:0};
             
            
-start();
-function start()
-{
-    var id = setInterval(animate,10);
-    function animate() {
-			context.clearRect(0,0,context.canvas.width, context.canvas.height);
-			
+                    start();
+
+                    function start()
+                    {
+                        var id = setInterval(animate,10);
+                        function animate() 
+                        {
+                            context.clearRect(0,0,context.canvas.width, context.canvas.height);
+			 
         /*
           // console.log(line2.x, line2.y);
         
@@ -145,42 +143,40 @@ function start()
             }
        */
 
-	}
-	
-	var id2 = setInterval(drawPaths,10);
-	function drawPaths() {
-		lowContext.lineWidth=5;
-		lowContext.strokeStyle="green";
-		drawLine(lowContext, line.x, line.y, line.x+1, line.y+1);
-		
-
-      
-	}
+	                       }
+                        
+                        var id2 = setInterval(drawPaths,10);
+                        function drawPaths() 
+                        {
+                            lowContext.lineWidth=5;
+                            lowContext.strokeStyle="green";
+                            drawLine(lowContext, line.x, line.y, line.x+1, line.y+1);
+                        }
 	
 	}
 
-	function drawLine(ctx, startx, starty, endx, endy) {
-		ctx.beginPath();
-		ctx.moveTo(startx,starty);
-		ctx.lineTo(endx, endy);
-		ctx.stroke();
-		ctx.closePath();
-	}
+	function drawLine(ctx, startx, starty, endx, endy) 
+                    {
+                        ctx.beginPath();
+                        ctx.moveTo(startx,starty);
+                        ctx.lineTo(endx, endy);
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
 
-	function drawCircle(ctx, centerx, centery, radius) {
-		ctx.beginPath();
-		ctx.arc(centerx, centery, radius, 0, 2*Math.PI);
-		ctx.fill();
-		ctx.closePath();
-	}
+	function drawCircle(ctx, centerx, centery, radius) 
+                    {
+                        ctx.beginPath();
+                        ctx.arc(centerx, centery, radius, 0, 2*Math.PI);
+                        ctx.fill();
+                        ctx.closePath();
+                    }
                     
-	window.addEventListener("load",setUp);
+                    window.addEventListener("load",setUp);
 }
-      window.onload = showTarget;
-                
-        
-            </script>
+      
+                    window.onload = showTarget;
+                </script>
 		</h3> 
-		
 		</body>
 		</html>
