@@ -5,27 +5,39 @@
 	</head>
 	<body>
 		<h1>Math and Physics For Games: Final Project
-            <h2>Give the right parameter to the pendulum and catch the ball!</h2>
+            <h2>Give the pendulum the relevant parameters and attempt to make the ball swing to the blue square!</h2>
+            <h3> The target is the blue square</h3>
+            <h3> Pendulum starting poing is the orange small square</h3>
 			
 		<script> 
-            showTarget();
+            //showTarget();
+            
+                      function rangeMoved(){
+	      span3.innerText= m1range.value + "kg";
+	   }
+            
+                          function angleRangeMoved(){
+	      span4.innerText= angleRange.value + "°C";
+	   }
 			window.mass1="";
 			window.t1=0;
 			window.isSet=false;
 			
 			function m1() {
-			 window.mass1=prompt("Mass: ");	
-				if (window.mass1!=null && window.mass1!="" && Number(window.mass1)>0)
+               
+                window.mass1=m1range.value;
+				//if (window.mass1!=null && window.mass1!="" && Number(window.mass1)>0)
 				document.getElementById("M1P").innerHTML="Mass = "+window.mass1+" kg";
-				else
-				document.getElementById("M1P").innerHTML="Please enter a valid value.";	
+				//else
+				//document.getElementById("M1P").innerHTML="Please enter a valid value.";	
 			}
 			
 			
 			function angle1() {
-				window.t1=prompt("Please enter the angle (radians): ");
+				window.t1=angleRange.value * (Math.PI/180);
+                    //prompt("Please enter the angle (radians): ");
 				if (Number(window.t1)>=0)
-					document.getElementById("T1P").innerHTML="Angle 1 = "+window.t1+" radians";
+					document.getElementById("T1P").innerHTML="Angle = "+window.t1.toFixed(2)+" radians";
 				else
 					document.getElementById("T1P").innerHTML="Please enter a valid value.";
 			}
@@ -40,6 +52,9 @@
 				document.getElementById("m1b").disabled=true;
 				document.getElementById("angle1b").disabled=true;
 				document.getElementById("offButton").disabled=true;
+                document.getElementById("m1range").disabled=true;
+                document.getElementById("angleRange").disabled=true;
+                    
 				setUp();
 				isSet=true;
 				}
@@ -47,7 +62,7 @@
             
                     function showTarget()
                     {
-                        
+                        console.log("hey");
 	var canvas=document.getElementById("layer1");
     var context=canvas.getContext("2d");
 	
@@ -60,11 +75,20 @@
             context.strokeStyle = "blue";
             context.rect(250, 300, 50, 50);
             context.stroke(); 
+                        context.beginPath();
+            context.lineWidth = "10";
+            context.strokeStyle = "orange";
+            context.rect(400, 400, 10, 10);
+            context.stroke(); 
                         
                     }
 			</script>	
-			<p><button id ="m1b" onclick="m1()">Mass</button></p>
-			<p><button id="angle1b" onclick="angle1()">Angle</button></p>
+			<p>Mass<input type="range" min="0" max="500" value="250" id ="m1range" onchange="rangeMoved()"/>
+             <span id="span3"></span>
+            <button id="m1b" onclick="m1()">ok</button></p>	
+			<p>Angle<input type="range" min="0" max="360" value="90" id ="angleRange" onchange="angleRangeMoved()"/>
+                 <span id="span4"></span>
+                <button id="angle1b" onclick="angle1()">ok</button></p>
 			<p><button id="offButton" onclick="turnOffButtons()">PLAY</button></p>
 			<p id="M1P"></p>
 			<p id="T1P"></p>
@@ -73,8 +97,8 @@
 		</h1>
 		<h3> 
 			<div class="container">
-			<canvas id="layer1" width="800" height="800" style="position: absolute; left: 0; top: 620; z-index: 1; border:1px solid #000000;"> </canvas>
-			<canvas id="layer2" width="800" height="800" styel="position: absolute; left: 0; top: 620; z-index: 2; border:1px solid #000000;"> </canvas>
+			<canvas id="layer1" width="800" height="800" style="position: absolute; left: 0; top: 620; z-index: 1; border:10px solid #000000;"> </canvas>
+			<canvas id="layer2" width="800" height="800" styel="position: absolute; left: 0; top: 620; z-index: 2; border:100px solid #000000;"> </canvas>
 			</div>
 		    <script> 
                 function setUp() {
@@ -112,14 +136,14 @@ function start()
     function animate() {
 			context.clearRect(0,0,context.canvas.width, context.canvas.height);
 			
-        
+        /*
           // console.log(line2.x, line2.y);
         
         if(line2.x>250 && line2.x<300 && line2.y>300 && line2.y<350)
             {
                 console.log("WIN!");
             }
-       
+       */
 
 	}
 	
@@ -152,7 +176,9 @@ function start()
                     
 	window.addEventListener("load",setUp);
 }
-            
+      window.onload = showTarget;
+                
+        
             </script>
 		</h3> 
 		
