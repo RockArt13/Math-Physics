@@ -73,5 +73,6 @@ The player will provide the second ball's parameter. In order to prevent unantic
 ω2' = --------------------------------------------------------------------------------------------------	<br> 
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L2 (2 m1 + m2 − m2 cos(2 θ1 − 2 θ2))
 
-
+## Play
+Play the game here: https://rockart13.itch.io/pendulum
 
