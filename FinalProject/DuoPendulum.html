@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 	<html>
 	<head>
-	<title>Double Pendulum Simulation</title>
+	<title>Dou Pendulum Puzzle Game</title>
 	</head>
 	<body>
 		<h1>Math and Physics For Games
@@ -38,20 +38,13 @@
             {
                  var date1 = new Date();
                  var date2 = new Date("01/01/2023");
-                // To calculate the time difference of two dates
-                var Difference_In_Time = date2.getTime() - date1.getTime();
-      
-                // To calculate the no. of days between two dates
-                var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+                 var Difference_In_Time = date2.getTime() - date1.getTime();
+                 var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
                 
-                console.log(typeof Difference_In_Days);
-                console.log(Difference_In_Days);
+                 var FINALNUMBER = (Math.abs(Difference_In_Days) * date1.getMonth()).toFixed(2);
                 
-                var FINALNUMBER = (Math.abs(Difference_In_Days) * date1.getMonth()).toFixed(2);
-                
-                return FINALNUMBER;
+                 return FINALNUMBER;
             }
-            
             
 			function SetMyMass() 
             {
@@ -87,12 +80,12 @@
                 
                 return FINALNUMBER/2;
             }
+            
             function SetMyAngle() 
             {
 				window.myAngle=angleRange.value * (Math.PI/180);
                 document.getElementById("MYANGLE").innerHTML="Angle = "+window.myAngle.toFixed(2)+" radians";
 			}
-			
 			
 			function DisableButtons() {
 				if (window.givenMass<=0)
@@ -219,7 +212,7 @@ function start()
 			drawLine(context,line2.x0, line2.y0, line2.x, line2.y);
 			context.fillStyle="orange";
 			drawCircle(context,line1.x, line1.y, radius1);
-			context.fillStyle="blue";
+			context.fillStyle="red";
 			drawCircle(context, line2.x, line2.y,radius2);
         
            
@@ -247,7 +240,7 @@ function start()
 		lowContext.lineWidth=7;
 		lowContext.strokeStyle="orange";
 		drawLine(lowContext, line1.x, line1.y, line1.x+1, line1.y+1);
-		lowContext.strokeStyle="blue";
+		lowContext.strokeStyle="red";
 		drawLine(lowContext, line2.x, line2.y, line2.x+1, line2.y+1);
       
 	}
