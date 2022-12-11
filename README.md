@@ -43,6 +43,35 @@ Radiator with temperature sensor in house simulation. PID algorithm.
 Temperature simulation. Simulations with random factor. Histogram, normal distribution, logaritmic scale.
 
 
-# Comments
-This is an ongoing project
+# FINAL PROJECT
+
+## Description 
+The final project is a math and physics-focused single player. However the player can challenge to the friends as well :)
+Every day, the player must overcome a new challenge in the game.
+In the dual pendulum example, the program generates daily new masses and swing angles for the first ball. The player must set the correct parameters for the second ball's mass and swing angle in order for it to reach the target. As long as and as often as second ball hits the target, the player gets more points.
+
+## Code
+### First Ball
+First ball's mass and angle may seem completely random at first glance, however this is not the true. They are very dependent on the current date, which is why they vary daily.
+### Seonc Ball
+The player will provide the second ball's parameter. In order to prevent unanticipated numbers, both the ball's mass and swing angle have predefined ranges of values, and the player must choose a value from that range.
+### How to calculate pendulum ?
+
+The above equations are now close to the form needed for the Runge Kutta method. The final step is convert these two 2nd order equations into four 1st order equations. Define the first derivatives as separate variables:
+
+ω1 = angular velocity of top rod
+ω2 = angular velocity of bottom rod
+Then we can write the four 1st order equations:
+
+θ1' = ω1
+
+θ2' = ω2
+
+ω1' = 	−g (2 m1 + m2) sin θ1 − m2 g sin(θ1 − 2 θ2) − 2 sin(θ1 − θ2) m2 (ω22 L2 + ω12 L1 cos(θ1 − θ2))
+L1 (2 m1 + m2 − m2 cos(2 θ1 − 2 θ2))
+ω2' = 	2 sin(θ1−θ2) (ω12 L1 (m1 + m2) + g(m1 + m2) cos θ1 + ω22 L2 m2 cos(θ1 − θ2))
+L2 (2 m1 + m2 − m2 cos(2 θ1 − 2 θ2))
+This is now exactly the form needed to plug in to the Runge-Kutta method for numerical solution of the system.
+
+
 
