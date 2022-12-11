@@ -57,21 +57,20 @@ First ball's mass and angle may seem completely random at first glance, however 
 The player will provide the second ball's parameter. In order to prevent unanticipated numbers, both the ball's mass and swing angle have predefined ranges of values, and the player must choose a value from that range.
 ### How to calculate pendulum ?
 
-The above equations are now close to the form needed for the Runge Kutta method. The final step is convert these two 2nd order equations into four 1st order equations. Define the first derivatives as separate variables:
-
 ω1 = angular velocity of top rod
 ω2 = angular velocity of bottom rod
-Then we can write the four 1st order equations:
 
 θ1' = ω1
 
 θ2' = ω2
 
-ω1' = 	−g (2 m1 + m2) sin θ1 − m2 g sin(θ1 − 2 θ2) − 2 sin(θ1 − θ2) m2 (ω22 L2 + ω12 L1 cos(θ1 − θ2))
-L1 (2 m1 + m2 − m2 cos(2 θ1 − 2 θ2))
-ω2' = 	2 sin(θ1−θ2) (ω12 L1 (m1 + m2) + g(m1 + m2) cos θ1 + ω22 L2 m2 cos(θ1 − θ2))
-L2 (2 m1 + m2 − m2 cos(2 θ1 − 2 θ2))
-This is now exactly the form needed to plug in to the Runge-Kutta method for numerical solution of the system.
+      −g (2 m1 + m2) sin θ1 − m2 g sin(θ1 − 2 θ2) − 2 sin(θ1 − θ2) m2 (ω22 L2 + ω12 L1 cos(θ1 − θ2))
+ω1' = --------------------------------------------------------------------------------------------------	
+                              L1 (2 m1 + m2 − m2 cos(2 θ1 − 2 θ2))
+
+              2 sin(θ1−θ2) (ω12 L1 (m1 + m2) + g(m1 + m2) cos θ1 + ω22 L2 m2 cos(θ1 − θ2))
+ω2' = --------------------------------------------------------------------------------------------------	
+      	                      L2 (2 m1 + m2 − m2 cos(2 θ1 − 2 θ2))
 
 
 
