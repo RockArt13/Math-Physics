@@ -36,6 +36,12 @@ Energy, heat, temperature. Specific heat capacity and amount of fuel. Temperatur
 ## 9. Room Heating And Heat Flow Out
 Simulations - room with inventary, two rooms, house with external environment.
 
+## 10. Multiple room heating
+Radiator with temperature sensor in house simulation. PID algorithm.
+
+## 11. Heating and Graphs
+Temperature simulation. Simulations with random factor. Histogram, normal distribution, logaritmic scale.
+
 
 # Comments
 This is an ongoing project
