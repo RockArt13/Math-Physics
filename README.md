@@ -53,7 +53,7 @@ In the dual pendulum example, the program generates daily new masses and swing a
 ## Code
 ### First Ball
 First ball's mass and angle may seem completely random at first glance, however this is not the true. They are very dependent on the current date, which is why they vary daily.
-### Seonc Ball
+### Second Ball
 The player will provide the second ball's parameter. In order to prevent unanticipated numbers, both the ball's mass and swing angle have predefined ranges of values, and the player must choose a value from that range.
 ### How to calculate pendulum ?
 
@@ -64,13 +64,14 @@ The player will provide the second ball's parameter. In order to prevent unantic
 
 θ2' = ω2
 
-      −g (2 m1 + m2) sin θ1 − m2 g sin(θ1 − 2 θ2) − 2 sin(θ1 − θ2) m2 (ω22 L2 + ω12 L1 cos(θ1 − θ2))
-ω1' = --------------------------------------------------------------------------------------------------	
-                              L1 (2 m1 + m2 − m2 cos(2 θ1 − 2 θ2))
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2 m1 + m2) sin θ1 − m2 g sin(θ1 − 2 θ2) − 2 sin(θ1 − θ2) m2 (ω22 L2 + ω12 L1 cos(θ1 − θ2)) <br> 
+ω1' = ----------------------------------------------------------------------------------------------<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; L1 (2 m1 + m2 − m2 cos(2 θ1 − 2 θ2))
 
-              2 sin(θ1−θ2) (ω12 L1 (m1 + m2) + g(m1 + m2) cos θ1 + ω22 L2 m2 cos(θ1 − θ2))
-ω2' = --------------------------------------------------------------------------------------------------	
-      	                      L2 (2 m1 + m2 − m2 cos(2 θ1 − 2 θ2))
+<br> <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 sin(θ1−θ2) (ω12 L1 (m1 + m2) + g(m1 + m2) cos θ1 + ω22 L2 m2 cos(θ1 − θ2))<br> 
+ω2' = --------------------------------------------------------------------------------------------------	<br> 
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L2 (2 m1 + m2 − m2 cos(2 θ1 − 2 θ2))
 
 
 
