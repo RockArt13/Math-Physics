@@ -46,7 +46,7 @@ Temperature simulation. Simulations with random factor. Histogram, normal distri
 # FINAL PROJECT
 
 ## Description 
-The final project is a math and physics-focused single player. However the player can challenge to the friends as well :)
+The final project is a math and physics-focused single player game. However the player can challenge to the friends as well :)
 Every day, the player must overcome a new challenge in the game.
 In the dual pendulum example, the program generates daily new masses and swing angles for the first ball. The player must set the correct parameters for the second ball's mass and swing angle in order for it to reach the target. As long as and as often as second ball hits the target, the player gets more points.
 
