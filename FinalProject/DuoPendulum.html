@@ -25,7 +25,7 @@
             
             function AngleRangeMoved()
             {
-                spanAngle.innerText = angleRange.value + "°C";
+                spanAngle.innerText = angleRange.value + "C";
             }
             
 			function SetGivenMass() 
@@ -94,17 +94,17 @@
                 } else if (window.myMass<=0)
                 {
                     document.getElementById("PLAY").innerHTML="Please select the ball mass.";
-                } else if (window.givenAngle<=0)
+                } else if (window.givenAngle<0)
                 {
                      document.getElementById("PLAY").innerHTML="Please generate the angle.";
-                } else if (window.myAngle<=0)
+                } else if (window.myAngle<0)
                     {
                         document.getElementById("PLAY").innerHTML="Please select the swing angle.";
                     }				else {
 				document.getElementById("GIVENMASSBUTTON").disabled=true;
 				document.getElementById("MYMASSBUTTON").disabled=true;
 				document.getElementById("GIVENANGLEBUTTON").disabled=true;
-				document.getElementById("MYANGLE").disabled=true;
+				document.getElementById("MYANGLEBUTTON").disabled=true;
 				document.getElementById("DISABLEBUTTONS").disabled=true;
 				SetUp();
                 playMode=true;
@@ -132,15 +132,15 @@
             context.stroke(); 
             }
 			</script>	
-			<p><button id ="GIVENMASSBUTTON" onclick="SetGivenMass()">Generate Random Mass</button></p>
-            <p><button id="GIVENANGLEBUTTON" onclick="SetGivenAngle()">Generate Random Angle</button></p>
+			<p><button id ="GIVENMASSBUTTON" onclick="SetGivenMass()">Generate TODAY's Mass</button></p>
+            <p><button id ="GIVENANGLEBUTTON" onclick="SetGivenAngle()">Generate TODAY's Angle</button></p>
 				<p>Ball Mass<input type="range" min="1" max="500" value="250" id ="myMassRange" onchange="RangeMoved()"/>
-                <span id="spanMyMass">150kg</span>
+                <span id="spanMyMass">250kg</span>
                 <button id="MYMASSBUTTON" onclick="SetMyMass()">OK</button></p>	
             
 			
-			<p>Swing Angle<input type="range" min="0" max="360" value="90" id ="angleRange" onchange="AngleRangeMoved()"/>
-                <span id="spanAngle">45°C</span>
+			     <p>Swing Angle<input type="range" min="0" max="360" value="45" id ="angleRange" onchange="AngleRangeMoved()"/>
+                 <span id="spanAngle">45<span>&#8451;</span></span>
                 <button id="MYANGLEBUTTON" onclick="SetMyAngle()">OK</button></p>
             
 			<p><button id="DISABLEBUTTONS" onclick="DisableButtons()">PLAY</button></p>
