@@ -58,21 +58,30 @@ First ball's mass and angle may seem completely random at first glance, however 
 The player will provide the second ball's parameter. In order to prevent unanticipated numbers, both the ball's mass and swing angle have predefined ranges of values, and the player must choose a value from that range.
 ### How to calculate pendulum ?
 
+**θ** = angle of pendulum (0 = vertical downwards, counter-clockwise is positive)
+**L** = length of rod (constant)
+
+The forces on the upper pendulum mass are the tension in the upper rod **T1** , the tension in the lower rod **T2** , and gravity **−m1 g** .
+For the lower pendulum, the forces are the tension in the lower rod **T2** , and gravity **−m2 g** .
+
+Define the first derivatives as separate variables:
+
 ω1 = angular velocity of top rod
+</br>
 ω2 = angular velocity of bottom rod
 
 θ1' = ω1
-
+</br>
 θ2' = ω2
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2 m1 + m2) sin θ1 − m2 g sin(θ1 − 2 θ2) − 2 sin(θ1 − θ2) m2 (ω22 L2 + ω12 L1 cos(θ1 − θ2)) <br> 
-ω1' = ----------------------------------------------------------------------------------------------<br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; L1 (2 m1 + m2 − m2 cos(2 θ1 − 2 θ2))
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-g(2 m1 + m2) sin θ1 − m2 g sin(θ1 − 2 θ2) − 2 sin(θ1 − θ2) m2 (ω2² L2 + ω1² L1 cos(θ1 − θ2)) <br> 
+ω1' = ------------------------------------------------------------------------------------------------------<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; L1 (2 m1 + m2 − m2 cos(2 θ1 − 2 θ2))
 
 <br> <br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 sin(θ1−θ2) (ω12 L1 (m1 + m2) + g(m1 + m2) cos θ1 + ω22 L2 m2 cos(θ1 − θ2))<br> 
-ω2' = --------------------------------------------------------------------------------------------------	<br> 
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L2 (2 m1 + m2 − m2 cos(2 θ1 − 2 θ2))
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 sin(θ1−θ2) (ω1² L1 (m1 + m2) + g(m1 + m2) cos θ1 + ω2² L2 m2 cos(θ1 − θ2))<br> 
+ω2' = ---------------------------------------------------------------------------------------	<br> 
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L2 (2 m1 + m2 − m2 cos(2 θ1 − 2 θ2))
 
 # Play
 Play the game here: https://rockart13.itch.io/pendulum
