@@ -44,6 +44,7 @@ Temperature simulation. Simulations with random factor. Histogram, normal distri
 
 
 # FINAL PROJECT
+## Duo Pendulum Daily Puzzle Game
 
 ## Description 
 The final project is a math and physics-focused single player game. However the player can challenge to the friends as well :)
