@@ -12,29 +12,26 @@
             <h3>Try to get as many points as possible.</h3>
 			
 		<script> 
-			window.givenMass="";
+            
+            // Given Values
+            window.givenMass="";
+            window.givenAngle=0;
+            
+            // Player Values
 			window.myMass="";
-			window.givenAngle=0;
 			window.myAngle=0;
+            
+            // Play Mode
 			window.playMode=false;
             
-            function RangeMoved()
-            {
-                spanMyMass.innerText = myMassRange.value + "kg";
-            }
-            
-            function AngleRangeMoved()
-            {
-                spanAngle.innerText = angleRange.value + "C";
-            }
-            
-			function SetGivenMass() 
+            // Today's Mass
+            function SetGivenMass() 
             {
                 window.givenMass = GenerateTheMass();
                 document.getElementById("GIVENMASS").innerHTML="Given mass = "+window.givenMass+" kg";
             }
             
-            function GenerateTheMass()
+                function GenerateTheMass()
             {
                  var date1 = new Date();
                  var date2 = new Date("01/01/2023");
@@ -46,18 +43,25 @@
                  return FINALNUMBER;
             }
             
-			function SetMyMass() 
+            // Today's Angle
+            
+            function SetGivenAngle() 
             {
-                 window.myMass = myMassRange.value;
-				 document.getElementById("MYMASS").innerHTML="Mass = "+window.myMass+" kg";
-			}
-			
-			function SetGivenAngle() {
 				window.givenAngle= GenerateTheAngle();
                 document.getElementById("GIVENANGLE").innerHTML="Given Angle = "+window.givenAngle.toFixed(2)+" radians";
 			}
+
+            function RangeMoved()
+            {
+                spanMyMass.innerText = myMassRange.value + "kg";
+            }
             
-            function GenerateTheAngle()
+            function AngleRangeMoved()
+            {
+                spanAngle.innerText = angleRange.value + '\u00B0C';
+            }
+            
+             function GenerateTheAngle()
             {
                  var date1 = new Date();
                  var date2 = new Date("01/01/2023");
@@ -81,11 +85,41 @@
                 return FINALNUMBER/2;
             }
             
+			
+            // Settings
+            
+			function SetMyMass() 
+            {
+                 window.myMass = myMassRange.value;
+				 document.getElementById("MYMASS").innerHTML="Mass = "+window.myMass+" kg";
+			}
+			
             function SetMyAngle() 
             {
 				window.myAngle=angleRange.value * (Math.PI/180);
                 document.getElementById("MYANGLE").innerHTML="Angle = "+window.myAngle.toFixed(2)+" radians";
 			}
+            
+             function ShowTarget()
+            {
+                var canvas=document.getElementById("layer1");
+                var context=canvas.getContext("2d");
+                canvas.width=800;
+                canvas.height=800;
+                
+                    //target
+                context.beginPath();
+                context.lineWidth = "10";
+                context.strokeStyle = "blue";
+                context.rect(250, 300, 50, 50);
+                context.stroke(); 
+                    //pendelum starting point
+                context.beginPath();
+                context.lineWidth = "10";
+                context.strokeStyle = "orange";
+                context.rect(400, 400, 10, 10);
+                context.stroke(); 
+            }
 			
 			function DisableButtons() {
 				if (window.givenMass<=0)
@@ -106,32 +140,15 @@
 				document.getElementById("GIVENANGLEBUTTON").disabled=true;
 				document.getElementById("MYANGLEBUTTON").disabled=true;
 				document.getElementById("DISABLEBUTTONS").disabled=true;
+                document.getElementById("myMassRange").disabled=true;
+                document.getElementById("angleRange").disabled=true;
+                       
 				SetUp();
                 playMode=true;
 				}
 			}
-            
-                 function ShowTarget()
-            {
-                var canvas=document.getElementById("layer1");
-                var context=canvas.getContext("2d");
-                canvas.width=800;
-                canvas.height=800;
-                
-                //target
-            context.beginPath();
-            context.lineWidth = "10";
-            context.strokeStyle = "blue";
-            context.rect(250, 300, 50, 50);
-            context.stroke(); 
-                //pendelum starting point
-            context.beginPath();
-            context.lineWidth = "10";
-            context.strokeStyle = "orange";
-            context.rect(400, 400, 10, 10);
-            context.stroke(); 
-            }
 			</script>	
+            
 			<p><button id ="GIVENMASSBUTTON" onclick="SetGivenMass()">Generate TODAY's Mass</button></p>
             <p><button id ="GIVENANGLEBUTTON" onclick="SetGivenAngle()">Generate TODAY's Angle</button></p>
 				<p>Ball Mass<input type="range" min="1" max="500" value="250" id ="myMassRange" onchange="RangeMoved()"/>
@@ -171,9 +188,13 @@
                     lowContext.beginPath();
                     lowContext.lineWidth = "10";
                     lowContext.strokeStyle = "blue";
+                    // To BE Polished: lowContext.rect(targetX, targetY, targetWidth, targetHeight);
+                    // Make target coordinates variables
+                    // It can also be random for future releases
                     lowContext.rect(250, 300, 50, 50);
                     lowContext.stroke(); 
            
+    //balls parameters for duo pendulum
 	var m1=window.givenMass;
 	var m2=window.myMass;
 	var radius1=m1/10;
@@ -218,30 +239,27 @@ function start()
            
             context.fillStyle="red";
             context.font = "30px Arial";
-            context.fillText("POINTS: &#10004;" + points, 200, 200);
+            
+            context.fillText("POINTS: " + points, 200, 200);
         
-        
+        // winning condition
+        // To Be Polished:  Make as a function
+        // To Be Polished:  if(line2.x>targetX && line2.x<targetX+targetWidth && line2.y>targetY && line2.y<targetY+targetHeight)
         if(line2.x>250 && line2.x<300 && line2.y>300 && line2.y<350)
             {
                 points++;
                 console.log(points);
                 context.fillStyle="red";
-                var check = &#10004;
-                context.fillText(check, 100, 200);
-                //context.fillText("POINTS " + points, 200, 200);
+                context.fillText("IN", 100, 200);
             }
-       
-
 	}
-	
 	var id2 = setInterval(drawPaths,10);
 	function drawPaths() {
 		lowContext.lineWidth=7;
 		lowContext.strokeStyle="orange";
 		drawLine(lowContext, line1.x, line1.y, line1.x+1, line1.y+1);
 		lowContext.strokeStyle="red";
-		drawLine(lowContext, line2.x, line2.y, line2.x+1, line2.y+1);
-      
+		drawLine(lowContext, line2.x, line2.y, line2.x+1, line2.y+1);   
 	}
 	
 	}
@@ -262,7 +280,7 @@ function start()
 	}
 	window.addEventListener("load",SetUp);
 }
-                  window.onload = ShowTarget;
+    window.onload = ShowTarget;
             
             </script>
 		</h3> 
