@@ -85,5 +85,7 @@ Define the first derivatives as separate variables:
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L2 (2 m1 + m2 − m2 cos(2 θ1 − 2 θ2))
 
 # Play
+<iframe frameborder="0" src="https://itch.io/embed/1831843" width="552" height="167"><a href="https://rockart13.itch.io/pendulum">Duo Pendulum Daily Puzzle by Artyom Grigoryan</a></iframe>
+
 Play the game here: https://rockart13.itch.io/pendulum
 
