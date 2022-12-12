@@ -59,6 +59,7 @@ The player will provide the second ball's parameter. In order to prevent unantic
 ### How to calculate pendulum ?
 
 **θ** = angle of pendulum (0 = vertical downwards, counter-clockwise is positive)
+</br>
 **L** = length of rod (constant)
 
 The forces on the upper pendulum mass are the tension in the upper rod **T1** , the tension in the lower rod **T2** , and gravity **−m1 g** .
@@ -66,13 +67,13 @@ For the lower pendulum, the forces are the tension in the lower rod **T2** , and
 
 Define the first derivatives as separate variables:
 
-ω1 = angular velocity of top rod
+**ω1** = angular velocity of top rod
 </br>
-ω2 = angular velocity of bottom rod
+**ω2** = angular velocity of bottom rod
 
-θ1' = ω1
+**θ1'** = ω1
 </br>
-θ2' = ω2
+**θ2'** = ω2
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-g(2 m1 + m2) sin θ1 − m2 g sin(θ1 − 2 θ2) − 2 sin(θ1 − θ2) m2 (ω2² L2 + ω1² L1 cos(θ1 − θ2)) <br> 
 ω1' = ------------------------------------------------------------------------------------------------------<br> 
